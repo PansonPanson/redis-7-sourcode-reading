@@ -49,9 +49,24 @@ struct __attribute__ ((__packed__)) sdshdr5 {
     char buf[];
 };
 struct __attribute__ ((__packed__)) sdshdr8 {
+    /**
+     * 已使用长度
+     */
     uint8_t len; /* used */
+
+    /**
+     * 总长度
+     */
     uint8_t alloc; /* excluding the header and null terminator */
+
+    /**
+     * 标识，长 1 字节，低 3 位表示类型，高 5 位预留
+     */
     unsigned char flags; /* 3 lsb of type, 5 unused bits */
+
+    /**
+     * 柔性数组，用于存放真正的内容数据
+     */
     char buf[];
 };
 struct __attribute__ ((__packed__)) sdshdr16 {
